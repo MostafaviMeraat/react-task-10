@@ -38,7 +38,7 @@ export const addPost = (data) => {
       title: data.title,
       description: data.description,
       likeCount: 0,
-      commentCount: 0
+      commentCount: []
 
     }
   }

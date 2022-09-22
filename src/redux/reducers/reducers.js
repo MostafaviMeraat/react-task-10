@@ -83,15 +83,18 @@ export const postsListReducer = (state = postInitial, { type, payload }) => {
       // console.log(payload);
       return [...state, payload]
     case ACTIONS.LIKE:
-      // console.log(payload, state[payload].likeCount + 1)
-      return [...state, state[payload].likeCount = state[payload].likeCount + 1]
+      // console.log(payload, state[payload].likeCount)
+      state[payload].likeCount = state[payload].likeCount + 1
+      return [...state]
     case ACTIONS.ADDCOMMENT:
       // console.log(payload)
-      return [...state, [...state[payload.index].commentCount,
-      state[payload.index].commentCount.splice(state[payload.index].commentCount.length, 0, payload.comment)]]
+      state[payload.index].commentCount.splice(state[payload.index].commentCount.length, 0, payload.comment)
+      return [...state]
     case ACTIONS.UPDATEPOST:
-      // console.log(payload)
-      return [...state, state[payload.index].title = payload.title, state[payload.index].description = payload.description]
+      console.log(payload)
+      state[payload.index].title = payload.title
+      state[payload.index].description = payload.description
+      return [...state]
     case ACTIONS.DELETEPOST:
       console.log(payload);
       state.splice(payload, 1)
@@ -100,5 +103,6 @@ export const postsListReducer = (state = postInitial, { type, payload }) => {
       return state
   }
 }
+
 
 
