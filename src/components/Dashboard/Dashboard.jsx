@@ -18,23 +18,36 @@ const Dashboard = () => {
   const date = posts.time
   const [comment, setComment] = useState(false)
 
-  const checkSetting = (index) => {
-    if (setting.like !== '' && posts[index].likeCount < parseInt(setting.like)) {
-      console.log('avali');
-      dispatch(like(index))
+  const checkSetting = (e, index) => {
+    if (e.target.name === 'like') {
+      console.log('here');
+      if (setting.like !== '' && posts[index].likeCount < parseInt(setting.like)) {
+        console.log('avali');
+        dispatch(like(index))
+      }
+      else if (setting.like === '') {
+        console.log('khali');
+        dispatch(like(index))
+      }
+      else {
+        alert('reach the limit');
+      }
     }
-    else if (setting.like === '') {
-      console.log('khali');
-      dispatch(like(index))
-    } else {
-      alert('reach the limit');
+    else if (e.target.name === 'comment') {
+      if (setting.comment !== '' && posts[index].commentCount < parseInt(setting.comment)) {
+        navigate(`feed/${index}`)
+      }
+      else if (setting.comment === '') {
+        navigate(`feed/${index}`)
+      }
+      else {
+        alert('reach the limit');
+      }
     }
 
   }
+  // navigate(`feed/${index}`
 
-  // if (setting.comment !== '' && posts[index].commentCount < parseInt(setting.comment)) {
-  //   console.log('hi comment');
-  // }
 
   const likePost = (index) => {
     checkSetting(index)
@@ -67,12 +80,12 @@ const Dashboard = () => {
             <p className='description'>{post.description}</p>
             <span className='italic'>Posted in: {post.year}/{post.month}/{post.day}  </span><br />
             <div className='emotions'>
-              <div onClick={() => likePost(index)}><span><i className="fa-regular fa-heart heart"></i>&nbsp;&nbsp; {post.likeCount}</span></div>
+              <div name='like' className='like' onClick={(e) => checkSetting(e, index)}><span><i className="fa-regular fa-heart heart"></i>&nbsp;&nbsp; {post.likeCount}</span></div>
               {post?.commentCount && <span>{post.commentCount.length} Comments</span>}
               {isAdmin && <div><i className="fa-sharp fa-solid fa-pen pen" onClick={() => { edit(index) }}></i></div>}
             </div>
             <div className='comment-box'>
-              <button onClick={() => navigate(`feed/${index}`)} className='add-comment-btn'>Add a comment</button>
+              <button name='comment' onClick={(e) => checkSetting(e, index)} className='add-comment-btn'>Add a comment</button>
             </div>
             <hr />
           </div>)
