@@ -12,8 +12,8 @@ const Dashboard = () => {
   const data = useSelector(state => state.login)
   const posts = useSelector(state => state.postList)
   const setting = useSelector(state => state.setting)
-  let isUser = false
-  let isAdmin = true
+  let isUser = true
+  let isAdmin = false
   data[0].user === 'user' ? isUser = true : isAdmin = true
   const date = posts.time
   const [comment, setComment] = useState(false)
@@ -81,6 +81,7 @@ const Dashboard = () => {
             <div className='emotions'>
               <div className='like' onClick={() => likePost(index)}><span><i className="fa-regular fa-heart heart"></i>&nbsp;&nbsp; {post.likeCount}</span></div>
               {post?.commentCount && <span>{post.commentCount.length} Comments</span>}
+              {console.log(isAdmin)}
               {isAdmin && <div><i className="fa-sharp fa-solid fa-pen pen" onClick={() => { edit(index) }}></i></div>}
             </div>
             <div className='comment-box'>
