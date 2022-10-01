@@ -2,11 +2,18 @@ import React, { useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { updatePost, deletePost } from '../../redux/actions/actions'
+import { useEffect } from 'react'
 
 const Update = () => {
+  const navigate = useNavigate()
+
+  const person = localStorage.getItem('user')
+
+  useEffect(() => {
+    person !== 'admin' && navigate('/dashboard/admin')
+  }, [person])
 
   const dispatch = useDispatch()
-  const navigate = useNavigate()
   const [acknowledge, setAcknowledge] = useState(false)
   const post = useSelector(state => state.postList)
   const { id } = useParams()

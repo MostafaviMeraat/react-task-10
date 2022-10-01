@@ -30,10 +30,12 @@ const Login = () => {
     e.preventDefault()
     data.map(() => {
       if (value.user === 'user' && value.pass === 'user') {
+        localStorage.setItem('user', `${value.user}`)
         dispatch(submit(value))
         navigate('/dashboard')
       }
       else if (value.user === 'admin' && value.pass === 'admin') {
+        localStorage.setItem('user', `${value.user}`)
         dispatch(submit(value))
         navigate('/dashboard')
       }

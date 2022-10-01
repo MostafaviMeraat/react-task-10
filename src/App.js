@@ -10,6 +10,7 @@ import Update from './components/Update/Update';
 import Error from './components/Error/Error';
 import New from './components/New/New';
 import PostDetail from './components/PostDetail/PostDetail'
+import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute';
 
 function App() {
 
@@ -26,11 +27,11 @@ function App() {
             <Route index element={<Login />} />
             <Route path='dashboard' element={<Dashboard />} />
             <Route path='dashboard/setting' element={<Setting />} />
-            <Route path='*' element={<Error />} />
+            <Route path='dashboard/feed/:id' element={<PostDetail />} />
             <Route path='dashboard/admin/new' element={<New />} />
             <Route path='dashboard/edit/:id' element={<Update />} />
-            <Route path='dashboard/feed/:id' element={<PostDetail />} />
-
+            <Route path='dashboard/admin' element={<ProtectedRoute />} />
+            <Route path='*' element={<Error />} />
           </Route>
         </Routes>
       </Router>

@@ -3,10 +3,17 @@ import { addPost } from '../../redux/actions/actions'
 import React from 'react'
 import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
+import { useEffect } from 'react'
 
 const New = () => {
-
   const navigate = useNavigate()
+
+  const person = localStorage.getItem('user')
+  console.log(person);
+  useEffect(() => {
+    person !== 'admin' && navigate('/dashboard/admin')
+  }, [person])
+
 
   const dispatch = useDispatch()
 

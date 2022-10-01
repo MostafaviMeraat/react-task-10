@@ -6,6 +6,8 @@ import { like } from '../../redux/actions/actions'
 
 const Dashboard = () => {
 
+  const person = localStorage.getItem('user')
+  console.log(person);
 
   const navigate = useNavigate()
   const dispatch = useDispatch()
@@ -43,14 +45,15 @@ const Dashboard = () => {
     }
   }
 
-
-
-
   const likePost = (index) => {
     checkSetting(index)
   }
 
   const edit = (id) => {
+    if (person !== 'admin') {
+      console.log(person);
+      navigate('dashboard/admin')
+    }
     navigate(`edit/${id}`)
   }
 
@@ -58,7 +61,6 @@ const Dashboard = () => {
     navigate(`feed/${id - 1}`)
   }
 
-  console.log(posts);
 
   return (
     <div className='dashboard-wrapper'>
@@ -69,7 +71,7 @@ const Dashboard = () => {
         ></i>
         {isAdmin && <i
           className="fa-regular fa-plus plus"
-          onClick={() => { navigate('admin/new') }}
+          onClick={() => { person === 'admin' ? navigate('admin/new') : navigate('dashboard/admin') }}
         ></i>}
       </nav >
       <div className="posts">
@@ -81,7 +83,6 @@ const Dashboard = () => {
             <div className='emotions'>
               <div className='like' onClick={() => likePost(index)}><span><i className="fa-regular fa-heart heart"></i>&nbsp;&nbsp; {post.likeCount}</span></div>
               {post?.commentCount && <span>{post.commentCount.length} Comments</span>}
-              {console.log(isAdmin)}
               {isAdmin && <div><i className="fa-sharp fa-solid fa-pen pen" onClick={() => { edit(index) }}></i></div>}
             </div>
             <div className='comment-box'>
