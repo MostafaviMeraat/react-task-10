@@ -1,6 +1,5 @@
 import './App.css';
-import { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 import Login from './components/Login/Login';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import Dashboard from './components/Dashboard/Dashboard'

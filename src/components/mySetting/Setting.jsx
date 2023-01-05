@@ -18,7 +18,6 @@ const Setting = () => {
 
   const changed = (e) => {
 
-
     if (e.target.name === 'theme') {
       if (currTheme) {
         dispatch(changeTheme('light'))

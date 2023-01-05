@@ -1,11 +1,10 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { submit } from '../../redux/actions/actions'
 import { useNavigate } from 'react-router-dom'
 
 
 const Login = () => {
-
 
   let value =
   {

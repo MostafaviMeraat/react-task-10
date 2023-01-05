@@ -6,9 +6,9 @@ import { addComment } from '../../redux/actions/actions'
 function PostDetail() {
   const { id } = useParams()
   const post = useSelector(state => state.postList)
+  const commentLimit = useSelector(state => state.setting)
   const dispatch = useDispatch()
   const currPost = post[id]
-  const [comment, setComment] = useState(false)
   let getChanges = ''
 
   const getComment = (e) => {
@@ -18,6 +18,14 @@ function PostDetail() {
   const submitNewComment = () => {
     dispatch(addComment(getChanges, id))
 
+  }
+  const checkLimit = () => {
+    console.log(currPost.commentCount.length, Number(commentLimit.comment));
+    if (commentLimit.comment != '' && currPost.commentCount.length < Number(commentLimit.comment)) {
+      submitNewComment()
+    } else {
+      alert('Reached the limit!')
+    }
   }
   return (
     <div className='post-detail-wrapper'>
@@ -35,7 +43,7 @@ function PostDetail() {
         </div>
         <div className="your-comment flex-start">
           <textarea placeholder='your comment' onChange={getComment}></textarea>
-          <button className='send-comment-btn' onClick={submitNewComment}><i className="fa-solid fa-check tic"></i></button>
+          <button className='send-comment-btn' onClick={checkLimit}><i className="fa-solid fa-check tic"></i></button>
         </div>
       </div>
     </div>
